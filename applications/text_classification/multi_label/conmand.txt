@@ -1,0 +1,3 @@
+
+pip install -r requirements.txt
+pip3 train.py  --dataset_dir "data"  --device "cpu"  --max_seq_length 128   --model_name "ernie-3.0-medium-zh"  --batch_size 32   --early_stop   --epochs 100
