@@ -1,3 +1,11 @@
+pip install paddlepaddle==2.3
+pip install scikit-learn==1.0.2
 
 pip install -r requirements.txt
-pip3 train.py  --dataset_dir "data"  --device "cpu"  --max_seq_length 128   --model_name "ernie-3.0-medium-zh"  --batch_size 32   --early_stop   --epochs 100
+- 默认
+python train.py  --dataset_dir "data"  --device "gpu" --max_seq_length 128   --model_name "ernie-3.0-medium-zh"  --batch_size 32   --early_stop   --epochs 100
+- cpu
+python -m paddle.distributed.launch --nproc_per_node 4 --backend "gloo" train.py  --dataset_dir "data"  --device "cpu" --max_seq_length 128   --model_name "ernie-3.0-medium-zh"  --batch_size 32 --early_stop  --epochs 100
+- gpu
+python paddle.device.set_device("gpu")
+python -m paddle.distributed.launch --gpus "0" train.py  --dataset_dir "data"  --device "gpu"  --max_seq_length 128  --model_name "ernie-3.0-medium-zh"   --batch_size 32   --early_stop  --epochs 100
