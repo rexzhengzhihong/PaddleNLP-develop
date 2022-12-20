@@ -2,12 +2,21 @@
 pip install paddlepaddle==2.4.0
 pip install scikit-learn==1.0.2
 pip install  CommandNotFound
-pip install paddle
-pip install paddlenlp==2.4
-pip install  common dual tight dprox wheel
+pip install data common dual tight prox wheel
+pip install paddle paddlenlp==2.4
 pip install cudatoolkit==10.2
 pip install paddlepaddle-gpu
 pip install -r requirements.txt
+
+
+### doccano标注转训练数据
+python doccano.py --doccano_file E:\zncsData\doccano\jsonl\onez-annualclassificationall.jsonl --save_dir ./data --splits 0.8 0.1 0.1 --task_type "multi_label"
+
+python doccano.py --doccano_file E:\zncsData\doccano\jsonl\doccano.jsonl --save_dir  E:\zncsData\doccano\jsonl\data --splits 1 0 0 --task_type "hierarchical"
+python doccano.py --doccano_file doccano.jsonl --save_dir ./data --splits 0.8 0.1 0.1 --task_type "multi_label"
+python doccano.py --doccano_file doccano.jsonl --save_dir ./data --splits 0.8 0.1 0.1 --task_type "hierarchical"
+
+
 
 - 卸载
 python -m pip uninstall paddlepaddle
