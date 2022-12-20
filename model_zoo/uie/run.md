@@ -1,9 +1,8 @@
 python doccano.py --doccano_file ./data/doccano_ext.json --task_type ext --save_dir ./data --splits 0.8 0.2 0 --schema_lang ch
 
-```shell
-export finetuned_model=./checkpoint/model_best ^
-python -u -m paddle.distributed.launch --gpus "0,1" finetune.py ^
-    --device gpu ^
+```bash
+python -u -m paddle.distributed.launch --cpu finetune.py ^
+    --device cpu ^
     --logging_steps 10 ^
     --save_steps 100 ^
     --eval_steps 100 ^
