@@ -125,3 +125,4 @@ FETCH_HEAD
 .vscode
 ./ppdiffusers/ppdiffusers/version.py
 /model_zoo/uie/uie-base/
+/model_zoo/uie/log/
