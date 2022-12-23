@@ -23,6 +23,7 @@ python -m pip uninstall paddlepaddle
 
 ###  paddle 默认是cpu版本 需要安葬GPU版本
 参考：https://www.paddlepaddle.org.cn/documentation/docs/zh/install/pip/linux-pip.html#ruhechakannindehuanjing
+#### 计算机环境查看
 uname -m && cat /etc/*release
 python -V
 python -m ensurepip
@@ -31,19 +32,47 @@ python -m pip --version
 python -m pip install paddlepaddle-gpu==2.4.0.post116 -f https://www.paddlepaddle.org.cn/whl/linux/mkl/avx/stable.html
 
 #### 电脑GPU环境
-- 显卡驱动 nvidia-smi
-- 安装cuda  nvcc -V
-- 安装cudnn
-```commandline
-cd /home/DiskA/app
-sudo dpkg -i cudnn-local-repo-ubuntu2004-8.4.0.27_1.0-1_amd64.deb
-sudo cp /var/cudnn-local-repo-*/cudnn-local-*-keyring.gpg /usr/share/keyrings/
-sudo apt-get update
-sudo apt-get install libcudnn8=8.4.0.27_1.0-1+cuda11.6
-sudo apt-get install libcudnn8-dev=8.4.0.27_1.0-1+cuda11.6
-sudo apt-get install libcudnn8-samples=8.4.0.27_1.0-1+cuda11.6
-```
+##### 查看cuda
+-  nvidia-smi  11.6
+-  nvcc -V   10.1
+-  cat /usr/local/cuda/version.txt   10.1
+- 三个版本不一样
+  
+##### 查看安装cudnn
+- 查看
+cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2
+cat /usr/local/cuda/include/cudnn_version.h | grep CUDNN_MAJOR -A 2
+  
+- 安装
+https://developer.nvidia.com/rdp/cudnn-archive
+tar zxvf cudnn-10.1-linux-x64-v8.0.5.39.tgz -C 
+  
+sudo cp cuda/include/cudnn.h /usr/local/cuda-10.1/include
+sudo cp cuda/include/* /usr/local/cuda-10.1/include
+sudo cp cuda/lib64/libcudnn* /usr/local/cuda-10.1/lib64
+sudo chmod a+r /usr/local/cuda-10.1/include/cudnn.h 
+sudo chmod a+r /usr/local/cuda-10.1/lib64/libcudnn*
 
+#sudo cp cuda/include/cudnn.h /usr/local/cuda/include
+#sudo cp cuda/include/* /usr/local/cuda/include
+#sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
+#sudo chmod a+r /usr/local/cuda/include/cudnn.h 
+#sudo chmod a+r /usr/local/cuda/lib64/libcudnn*
+
+sudo dpkg -i libcudnn8_8.0.5.39-1+cuda10.1_amd64.deb
+sudo dpkg -i libcudnn8-dev_8.0.5.39-1+cuda10.1_amd64.deb
+sudo dpkg -i libcudnn8-samples_8.0.5.39-1+cuda10.1_amd64.deb
+
+
+##### 安装paddlepaddle-gpu
+- https://pypi.tuna.tsinghua.edu.cn/simple/paddlepaddle-gpu/
+- 旧版 https://www.paddlepaddle.org.cn/install/old?docurl=/documentation/docs/zh/install/pip/windows-pip.html
+
+- CUDA 10.1
+python -m pip install paddlepaddle-gpu==2.3.2.post101 -f https://www.paddlepaddle.org.cn/whl/linux/mkl/avx/stable.html
+
+##### 卸载paddlepaddle
+python -m pip uninstall paddlepaddle
 
 ## 运行命令
 #### 训练 train
